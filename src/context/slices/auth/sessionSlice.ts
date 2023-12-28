@@ -16,8 +16,8 @@ export const sessionSlice = createSlice({
   initialState,
   name: "sessionState",
   reducers: {
-    assignNewSession: (state)=>{
-      state.value = 
-    }
+    assignNewSession: (state) => {
+      // state.value = TODO-UNUSED
+    },
   },
 });
