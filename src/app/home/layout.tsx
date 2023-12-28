@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { Providers } from "@/context/Providers";
+import HomeNav from "../components/HomeNav";
 
 export const metadata: Metadata = {
   title: "portfolio-0-nextjs-supabase",
@@ -15,6 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <HomeNav />
         <Providers>{children}</Providers>
       </body>
     </html>
