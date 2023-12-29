@@ -23,11 +23,13 @@ import { User } from "@supabase/supabase-js";
 
 export default function HomeNav() {
   const session = useContext(SessionContext);
-  const [user, setUser] = useState<User | string>("...💖");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState<User | undefined>(undefined);
+
+  const menuItems = ["Home", "Chat", "Notes", "Account"];
 
   useEffect(() => {
-    setUser(session?.user as User);
+    setUser(session?.user);
   });
 
   const handleSignout = async () => {
@@ -35,8 +37,6 @@ export default function HomeNav() {
     await signOutSupabase();
     window.location.reload();
   };
-
-  const menuItems = ["Home", "Chat", "Notes", "Account"];
 
   return (
     <Navbar
@@ -96,7 +96,9 @@ export default function HomeNav() {
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold py-1">{(user as User).email}</p>
+              <p className="font-semibold py-1">
+                {!user ? "💞" : (user as User).email}
+              </p>
               <hr />
             </DropdownItem>
             <DropdownItem key="settings">My Settings</DropdownItem>
