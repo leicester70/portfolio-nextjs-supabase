@@ -20,7 +20,6 @@ import { errorToastOptions, infoToastOptions } from "@/lib/customToastOptions";
 import { SessionContext } from "@/context/Providers";
 
 export default function LoginTabs() {
-  const supabase = createClientComponentClient();
   const router = useRouter();
   const session = useContext(SessionContext);
   const [loading, setLoading] = useState<boolean>(false);

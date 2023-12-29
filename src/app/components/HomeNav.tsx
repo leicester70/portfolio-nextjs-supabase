@@ -18,25 +18,34 @@ import {
 import { signOutSupabase } from "@/lib/actions/sign-out-action";
 import { toast } from "react-toastify";
 import { infoToastOptions } from "@/lib/customToastOptions";
-import { SessionContext } from "@/context/Providers";
-import { User } from "@supabase/supabase-js";
+import { Session } from "@supabase/supabase-js";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function HomeNav() {
-  const session = useContext(SessionContext);
-  const [user, setUser] = useState<User | string>("...💖");
+  const supabase = createClientComponentClient();
+  const [session, setSession] = useState<Session | null | undefined>();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const menuItems = ["Home", "Chat", "Notes", "Account"];
+
   useEffect(() => {
-    setUser(session?.user as User);
-  });
+    const fetchSessionData = async () => {
+      try {
+        const response = await supabase.auth.getSession();
+        if (response.error) throw response.error;
+        setSession(response.data.session);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchSessionData();
+  }, [session]);
 
   const handleSignout = async () => {
     toast.info("Signed Out 👋🏻", infoToastOptions);
     await signOutSupabase();
     window.location.reload();
   };
-
-  const menuItems = ["Home", "Chat", "Notes", "Account"];
 
   return (
     <Navbar
@@ -96,7 +105,9 @@ export default function HomeNav() {
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold py-1">{(user as User).email}</p>
+              <p className="font-semibold py-1">
+                {!session ? "..." : session?.user.email}
+              </p>
               <hr />
             </DropdownItem>
             <DropdownItem key="settings">My Settings</DropdownItem>
