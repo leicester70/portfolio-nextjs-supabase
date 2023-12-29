@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Navbar,
   NavbarContent,
@@ -8,7 +8,6 @@ import {
   NavbarMenu,
   NavbarMenuToggle,
   NavbarMenuItem,
-  Button,
   Link,
   Dropdown,
   DropdownTrigger,
@@ -16,13 +15,13 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
 import { signOutSupabase } from "@/lib/actions/sign-out-action";
 import { toast } from "react-toastify";
 import { infoToastOptions } from "@/lib/customToastOptions";
+import { SessionContext } from "@/context/Providers";
 
 export default function HomeNav() {
-  const router = useRouter();
+  const session = useContext(SessionContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSignout = async () => {
@@ -85,19 +84,16 @@ export default function HomeNav() {
               color="secondary"
               name="Your Account"
               size="sm"
-              src="https://i.777.porn/images/44/476.jpg"
+              src="https://lh3.googleusercontent.com/p/AF1QipMtm9k79l83GgWcVeAfEM6SYZx1OtxPrmX5_pcQ=w1080-h608-p-no-v0"
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">zoey@example.com</p>
+              <p className="font-semibold py-1">{session?.user.email}</p>
+              <hr />
             </DropdownItem>
             <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
-            <DropdownItem key="analytics">Analytics</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem>
             <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
             <DropdownItem key="logout" color="danger" onClick={handleSignout}>
               Signout

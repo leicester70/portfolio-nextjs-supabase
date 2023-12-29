@@ -13,6 +13,6 @@ export async function signinWithSupabaseAction({
       if (authResponse.error) throw authResponse.error;
     })
     .catch((error) => {
-      return error;
+      return Promise.reject(Error(`${error}`));
     });
 }
