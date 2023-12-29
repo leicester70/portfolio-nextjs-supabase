@@ -96,7 +96,7 @@ export default function HomeNav() {
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold py-1">{user.email}</p>
+              <p className="font-semibold py-1">{(user as User).email}</p>
               <hr />
             </DropdownItem>
             <DropdownItem key="settings">My Settings</DropdownItem>
