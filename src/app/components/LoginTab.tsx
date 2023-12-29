@@ -11,7 +11,6 @@ import {
   CardHeader,
   Spinner,
 } from "@nextui-org/react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { signUpWithSupabaseAction } from "../../lib/actions/sign-up-action";
