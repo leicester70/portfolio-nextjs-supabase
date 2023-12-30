@@ -1,4 +1,4 @@
-import HomeNav from "../components/HomeNav";
+import HomeNav from "../components/AppNav";
 
 export default function HomeLayout({
   children,

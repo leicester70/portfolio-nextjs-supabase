@@ -20,14 +20,15 @@ import { toast } from "react-toastify";
 import { infoToastOptions } from "@/lib/customToastOptions";
 import { Session } from "@supabase/supabase-js";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { usePathname } from "next/navigation";
 
 export default function HomeNav() {
+  const pathname = usePathname();
   const supabase = createClientComponentClient();
   const [session, setSession] = useState<Session | null | undefined>();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = ["Home", "Chat", "Notes"];
-  const [currentPage, setCurrentPage] = useState<string>("");
 
   useEffect(() => {
     const fetchSessionData = async () => {
@@ -73,9 +74,11 @@ export default function HomeNav() {
         </NavbarBrand>
         {menuItems.map((obj, index) => {
           return (
-            <NavbarItem>
+            <NavbarItem key={`${obj}-${index}`}>
               <Link
-                color={currentPage == obj ? "foreground" : undefined}
+                underline={
+                  pathname.match(obj.toLowerCase()) ? "always" : "hover"
+                }
                 href={`${obj.toLowerCase()}`}
               >
                 {obj}
@@ -116,21 +119,15 @@ export default function HomeNav() {
       </NavbarContent>
 
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+        {menuItems.map((obj, index) => (
+          <NavbarMenuItem key={`${obj}-${index}`}>
             <Link
               className="w-full"
-              color={
-                index === 2
-                  ? "warning"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              href="#"
+              underline={pathname.match(obj.toLowerCase()) ? "always" : "hover"}
+              href={`${obj.toLowerCase()}`}
               size="lg"
             >
-              {item}
+              {obj}
             </Link>
           </NavbarMenuItem>
         ))}

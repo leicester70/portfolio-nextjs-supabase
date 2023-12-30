@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/context/Providers";
+import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "portfolio-0-nextjs-supabase",
@@ -14,8 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Providers>{children}</Providers>
+      <body className="leading-relaxed">
+        <Providers>
+          <section className="main-content">{children}</section>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

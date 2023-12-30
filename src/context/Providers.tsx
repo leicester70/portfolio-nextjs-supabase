@@ -3,9 +3,12 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import dotenv from "dotenv";
 import { createContext } from "react";
 import { Session } from "@supabase/auth-helpers-nextjs";
+import { NextUIProvider } from "@nextui-org/react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 interface Props {
   children: React.ReactNode;
@@ -18,7 +21,11 @@ export function Providers({ children }: Props) {
   return (
     <>
       <Provider store={store}>
-        {children}
+        <NextUIProvider>
+          <NextThemesProvider attribute="class" defaultTheme="dark">
+            {children}
+          </NextThemesProvider>
+        </NextUIProvider>
         <ToastContainer />
       </Provider>
     </>
