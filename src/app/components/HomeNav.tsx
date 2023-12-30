@@ -26,7 +26,8 @@ export default function HomeNav() {
   const [session, setSession] = useState<Session | null | undefined>();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = ["Home", "Chat", "Notes", "Account"];
+  const menuItems = ["Home", "Chat", "Notes"];
+  const [currentPage, setCurrentPage] = useState<string>("");
 
   useEffect(() => {
     const fetchSessionData = async () => {
@@ -49,7 +50,7 @@ export default function HomeNav() {
 
   return (
     <Navbar
-      maxWidth="sm"
+      maxWidth="md"
       isBordered
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
@@ -62,31 +63,26 @@ export default function HomeNav() {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <p>fucku</p>
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">p-0</p>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarBrand>
-          <p>fucku</p>
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">p-0</p>
         </NavbarBrand>
-        <NavbarItem>
-          <Link color="foreground" href="/home">
-            Home
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href="#" aria-current="page">
-            Chat
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href="#" aria-current="page">
-            Notes
-          </Link>
-        </NavbarItem>
+        {menuItems.map((obj, index) => {
+          return (
+            <NavbarItem>
+              <Link
+                color={currentPage == obj ? "foreground" : undefined}
+                href={`${obj.toLowerCase()}`}
+              >
+                {obj}
+              </Link>
+            </NavbarItem>
+          );
+        })}
       </NavbarContent>
 
       <NavbarContent as="div" justify="end">

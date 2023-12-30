@@ -1,11 +1,16 @@
-"use client";
+import HomeNav from "../components/HomeNav";
 
-export default function Home() {
+export default function HomeLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <>
+      <HomeNav />
       <div className="mt-6 grid grid-cols-12 gap-1">
         <div className="col-start-2 col-span-10 lg:col-start-5 lg:col-span-4">
-          <div className="mt-5">welcome home</div>
+          {children}
         </div>
         <div />
       </div>
