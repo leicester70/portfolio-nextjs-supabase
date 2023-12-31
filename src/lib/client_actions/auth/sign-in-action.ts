@@ -1,4 +1,4 @@
-import { UserCredentials } from "@/interface/UserCredentials";
+import { UserCredentials } from "@/lib/interfaces/UserCredentials";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { AuthResponse } from "@supabase/supabase-js";
 

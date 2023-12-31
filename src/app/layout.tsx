@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/context/Providers";
-import Footer from "./components/Footer";
+import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   title: "portfolio-0-nextjs-supabase",

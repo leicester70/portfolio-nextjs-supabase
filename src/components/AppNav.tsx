@@ -15,7 +15,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/react";
-import { signOutSupabase } from "@/lib/actions/sign-out-action";
+import { signOutSupabase } from "@/lib/client_actions/auth/sign-out-action";
 import { toast } from "react-toastify";
 import { infoToastOptions } from "@/lib/customToastOptions";
 import { Session } from "@supabase/supabase-js";

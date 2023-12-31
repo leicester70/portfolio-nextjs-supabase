@@ -13,8 +13,8 @@ import {
 } from "@nextui-org/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { signUpWithSupabaseAction } from "../../lib/actions/sign-up-action";
-import { signinWithSupabaseAction } from "../../lib/actions/sign-in-action";
+import { signUpWithSupabaseAction } from "../lib/client_actions/auth/sign-up-action";
+import { signinWithSupabaseAction } from "../lib/client_actions/auth/sign-in-action";
 import { errorToastOptions, infoToastOptions } from "@/lib/customToastOptions";
 import { SessionContext } from "@/context/Providers";
 
