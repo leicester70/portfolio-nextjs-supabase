@@ -1,6 +1,4 @@
 "use client";
-import { Provider } from "react-redux";
-import { store } from "./store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,14 +18,12 @@ export function Providers({ children }: Props) {
   dotenv.config();
   return (
     <>
-      <Provider store={store}>
-        <NextUIProvider>
-          <NextThemesProvider attribute="class" defaultTheme="dark">
-            {children}
-          </NextThemesProvider>
-        </NextUIProvider>
-        <ToastContainer />
-      </Provider>
+      <NextUIProvider>
+        <NextThemesProvider attribute="class" defaultTheme="dark">
+          {children}
+        </NextThemesProvider>
+      </NextUIProvider>
+      <ToastContainer />
     </>
   );
 }

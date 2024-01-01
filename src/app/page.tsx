@@ -1,4 +1,3 @@
-"use client";
 import LoginTabs from "../components/LoginTab";
 
 export default function LandingPage() {

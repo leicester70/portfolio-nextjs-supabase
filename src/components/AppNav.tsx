@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarContent,
@@ -17,7 +17,7 @@ import {
 } from "@nextui-org/react";
 import { signOutSupabase } from "@/lib/client_actions/auth/sign-out-action";
 import { toast } from "react-toastify";
-import { infoToastOptions } from "@/lib/customToastOptions";
+import { topCentredColoredToastOptions } from "@/lib/customToastOptions";
 import { Session } from "@supabase/supabase-js";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { usePathname } from "next/navigation";
@@ -41,10 +41,10 @@ export default function HomeNav() {
       }
     };
     fetchSessionData();
-  }, [session]);
+  });
 
   const handleSignout = async () => {
-    toast.info("Signed Out 👋🏻", infoToastOptions);
+    toast.info("Signed Out 👋🏻", topCentredColoredToastOptions);
     await signOutSupabase();
     window.location.reload();
   };

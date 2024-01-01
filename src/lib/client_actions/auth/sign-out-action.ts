@@ -1,4 +1,4 @@
-import { errorToastOptions } from "@/lib/customToastOptions";
+import { bottomCenteredColoredToastOptions } from "@/lib/customToastOptions";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "react-toastify";
 
@@ -9,5 +9,5 @@ export async function signOutSupabase() {
     .then((data) => {
       if (data.error) throw data.error;
     })
-    .catch((error) => toast.error(error, errorToastOptions));
+    .catch((error) => toast.error(error, bottomCenteredColoredToastOptions));
 }

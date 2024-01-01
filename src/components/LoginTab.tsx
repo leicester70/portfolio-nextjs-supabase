@@ -15,8 +15,11 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { signUpWithSupabaseAction } from "../lib/client_actions/auth/sign-up-action";
 import { signinWithSupabaseAction } from "../lib/client_actions/auth/sign-in-action";
-import { errorToastOptions, infoToastOptions } from "@/lib/customToastOptions";
-import { SessionContext } from "@/context/Providers";
+import {
+  bottomCenteredColoredToastOptions,
+  topCentredColoredToastOptions,
+} from "@/lib/customToastOptions";
+import { SessionContext } from "@/components/Providers";
 
 export default function LoginTabs() {
   const router = useRouter();
@@ -43,7 +46,7 @@ export default function LoginTabs() {
             "Sign In Rejected 🤯 Please verify your email/password that you have provided is valid",
           success: "Welcome back! ✨",
         },
-        errorToastOptions
+        bottomCenteredColoredToastOptions
       )
       .finally(() => {
         router.refresh();
@@ -63,7 +66,7 @@ export default function LoginTabs() {
           success:
             "Sign Up request received, please confirm your account via your inbox ✨",
         },
-        infoToastOptions
+        bottomCenteredColoredToastOptions
       )
       .finally(() => {
         router.refresh();
