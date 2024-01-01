@@ -29,8 +29,10 @@
 html {}
 
 body {
+  transition: all .75s;
   font-family: "Figtree Variable", sans-serif;
 }
+
 
 .main-content {
   min-height: 91vh;
@@ -50,6 +52,12 @@ h6 {
 h1 {
   font-size: 4rem;
 }
+
+
+h2 {
+  font-size: 2.5rem;
+}
+
 
 footer {
   min-height: 12vh;

@@ -122,7 +122,7 @@ export default function HomeNav() {
         {menuItems.map((obj, index) => (
           <NavbarMenuItem key={`${obj}-${index}`}>
             <Link
-              className="w-full"
+              className="w-full mb-2"
               underline={pathname.match(obj.toLowerCase()) ? "always" : "hover"}
               href={`${obj.toLowerCase()}`}
               size="lg"
