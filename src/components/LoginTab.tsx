@@ -19,7 +19,7 @@ import {
   bottomCenteredColoredToastOptions,
   topCentredColoredToastOptions,
 } from "@/lib/customToastOptions";
-import { SessionContext } from "@/components/Providers";
+import { SessionContext } from "@/components/providers/Providers";
 
 export default function LoginTabs() {
   const router = useRouter();
