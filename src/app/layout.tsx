@@ -21,10 +21,6 @@ export default function RootLayout({
           <Footer />
         </Providers>
       </body>
-      <script type="module">
-        import emojiDatasourceApple from
-        'https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/+esm'
-      </script>
     </html>
   );
 }
