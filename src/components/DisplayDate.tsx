@@ -9,5 +9,5 @@ interface Props {
 export default function DisplayDate({ isostring }: Props) {
   const formattedDate = transformDate(isostring);
 
-  return <span className="text-tiny">{formattedDate}</span>;
+  return <span className="text-tiny py-4">{formattedDate}</span>;
 }

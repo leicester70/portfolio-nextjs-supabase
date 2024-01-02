@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -15,14 +15,17 @@ import { CreateNote } from "@/lib/interfaces/Note";
 import { createNewNote } from "@/lib/client_actions/notes-actions";
 import { toast } from "react-toastify";
 import { topCentredColoredToastOptions } from "@/lib/customToastOptions";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface Props {
   authUserID: string;
+  setCompletedFetch: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function CreateNoteButton({ authUserID }: Props) {
-  const router = useRouter();
+export default function CreateNoteButton({
+  authUserID,
+  setCompletedFetch,
+}: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [noteTitle, setNoteTitle] = useState<string>("");
   const [noteContent, setNoteContent] = useState<string>("");
@@ -54,7 +57,7 @@ export default function CreateNoteButton({ authUserID }: Props) {
       topCentredColoredToastOptions
     );
     onClose();
-    router.refresh();
+    setCompletedFetch(false);
   };
 
   return (

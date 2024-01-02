@@ -8,6 +8,7 @@ import { Spinner } from "@nextui-org/react";
 export default function Notes() {
   const supabase = createClientComponentClient();
   const [authUserID, setAuthUserID] = useState<string>("");
+  const [completedFetch, setCompletedFetch] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +24,10 @@ export default function Notes() {
       <div className="flex items-center">
         <h2>Notes</h2>
         <div className="ml-auto mr-0">
-          <CreateNoteButton authUserID={authUserID} />
+          <CreateNoteButton
+            setCompletedFetch={setCompletedFetch}
+            authUserID={authUserID}
+          />
         </div>
       </div>
       <hr className="mt-2 mb-6" />
@@ -36,7 +40,11 @@ export default function Notes() {
             />
           </div>
         ) : (
-          <NotesDisplay authUserID={authUserID} />
+          <NotesDisplay
+            completedFetch={completedFetch}
+            setCompletedFetch={setCompletedFetch}
+            authUserID={authUserID}
+          />
         )}
       </section>
     </>

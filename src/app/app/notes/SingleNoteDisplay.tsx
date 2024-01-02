@@ -23,6 +23,7 @@ interface Props {
   note: Note;
   notes: Note[];
   setNotes: Dispatch<SetStateAction<Note[]>>;
+  setCompletedFetch: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function SingleNoteDisplay({
@@ -30,6 +31,7 @@ export default function SingleNoteDisplay({
   note,
   notes,
   setNotes,
+  setCompletedFetch,
 }: Props) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -47,9 +49,10 @@ export default function SingleNoteDisplay({
         bottomCenteredColoredToastOptions
       )
       .then(() => {
-        let tempNotes = notes;
+        setCompletedFetch(false);
+        var tempNotes = notes;
         let index = tempNotes.findIndex((obj) => obj.id === noteID);
-        if (index > -1) tempNotes.splice(index, 1);
+        if (index > -1) tempNotes = tempNotes.splice(index, 1);
         setNotes(tempNotes);
       })
       .catch();

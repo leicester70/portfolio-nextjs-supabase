@@ -1,36 +1,36 @@
 "use client";
 import { retrieveUserNotes } from "@/lib/client_actions/notes-actions";
 import { Note } from "@/lib/interfaces/Note";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import SingleNoteDisplay from "./SingleNoteDisplay";
-import { Spinner } from "@nextui-org/react";
+import { toast } from "react-toastify";
 
 interface Props {
   authUserID: string;
+  completedFetch: boolean;
+  setCompletedFetch: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function NotesDisplay({ authUserID }: Props) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+export default function NotesDisplay({
+  authUserID,
+  completedFetch,
+  setCompletedFetch,
+}: Props) {
   const [notes, setNotes] = useState<Note[]>([]);
 
   useEffect(() => {
-    setIsLoading(true);
     const fetchNotes = async () => {
       const data = await retrieveUserNotes(authUserID);
       setNotes(data as Note[]);
     };
-    fetchNotes();
-    setIsLoading(false);
-  }, [notes]);
+    if (!completedFetch) {
+      fetchNotes();
+      setCompletedFetch(true);
+    }
+  });
 
-  if (isLoading) {
-    return (
-      <Spinner className="mt-32 text-center align-middle scale-150" size="lg" />
-    );
-  }
-
-  if (!notes) {
-    <span className="text-center"> Looks empty here... 🍃</span>;
+  if (notes.length == 0) {
+    <span className="mt-20 text-center bg-white"> Looks empty here... 🍃</span>;
   }
 
   return (
@@ -41,6 +41,7 @@ export default function NotesDisplay({ authUserID }: Props) {
             authUserID={authUserID}
             notes={notes}
             setNotes={setNotes}
+            setCompletedFetch={setCompletedFetch}
             key={`${obj.id}-${index}`}
             note={obj}
           />
