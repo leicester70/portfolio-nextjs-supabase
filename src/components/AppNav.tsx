@@ -79,7 +79,7 @@ export default function HomeNav() {
                 underline={
                   pathname.match(obj.toLowerCase()) ? "always" : "hover"
                 }
-                href={`${obj.toLowerCase()}`}
+                href={`/app/${obj.toLowerCase()}`}
               >
                 {obj}
               </Link>
@@ -124,7 +124,7 @@ export default function HomeNav() {
             <Link
               className="w-full mb-2"
               underline={pathname.match(obj.toLowerCase()) ? "always" : "hover"}
-              href={`${obj.toLowerCase()}`}
+              href={`/app/${obj.toLowerCase()}`}
               size="lg"
             >
               {obj}
