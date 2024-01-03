@@ -14,6 +14,7 @@ import {
   ModalFooter,
   useDisclosure,
   Button,
+  ButtonGroup,
 } from "@nextui-org/react";
 import { Dispatch, SetStateAction, useState } from "react";
 import { toast } from "react-toastify";
@@ -34,8 +35,6 @@ export default function SingleNoteDisplay({
   setCompletedFetch,
 }: Props) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [selectedID, setSelectedID] = useState<number | undefined>(undefined);
 
   const handleDeleteNote = async (noteID: number) => {
     await toast
@@ -61,12 +60,12 @@ export default function SingleNoteDisplay({
   return (
     <Card
       id={`${note.id}`}
-      style={{ height: 200 }}
+      style={{ height: 275 }}
       className="p-4 pb-10 mt-4 "
       onMouseDown={onOpen}
     >
       <CardHeader className="block">
-        <h3 className="min-w-max">{note.title}</h3>
+        <h3 className="min-w-max block">{note.title}</h3>
         <DisplayDate isostring={note.last_updated as string} />
         <hr className="opacity-10" />
       </CardHeader>
@@ -74,58 +73,49 @@ export default function SingleNoteDisplay({
         {note.content}
       </CardBody>
       <Modal
-        size="md"
+        size="lg"
         placement="center"
         scrollBehavior="outside"
-        backdrop="blur"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        classNames={{
-          backdrop:
-            "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20",
-        }}
+        backdrop="blur"
       >
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="block">
-                {note.title}{" "}
+                <h3 style={{ textWrap: "wrap", textOverflow: "ellipsis" }}>
+                  {note.title}
+                </h3>
                 <DisplayDate isostring={note.last_updated as string} />
                 <hr className="opacity-10" />
               </ModalHeader>
-              <ModalBody
-                style={{ minHeight: 300 }}
-                className="flex flex-col gap-1"
-              >
-                <textarea
-                  readOnly={true}
-                  value={note.content}
-                  className="bg-transparent p-4"
-                  style={{ height: 500 }}
-                />
+              <ModalBody className="flex flex-col gap-1">
+                <p
+                  style={{
+                    minHeight: 275,
+                    textOverflow: "ellipsis",
+                    textWrap: "wrap",
+                  }}
+                >
+                  {note.content}
+                </p>
               </ModalBody>
               <ModalFooter>
-                <Button
-                  size="sm"
-                  color="danger"
-                  onClick={() => {
-                    handleDeleteNote(note.id as number);
-                  }}
-                >
-                  Delete
-                </Button>
-                <Button
-                  size="sm"
-                  color="warning"
-                  onPress={() => {
-                    setIsEditing(true);
-                  }}
-                >
-                  edit
-                </Button>
-                <Button size="sm" onPress={onClose}>
-                  Close
-                </Button>
+                <ButtonGroup>
+                  <Button
+                    size="sm"
+                    color="danger"
+                    onClick={() => {
+                      handleDeleteNote(note.id as number);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                  <Button size="sm" onPress={onClose}>
+                    Close
+                  </Button>
+                </ButtonGroup>
               </ModalFooter>
             </>
           )}

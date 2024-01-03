@@ -11,7 +11,7 @@ import {
   Textarea,
   Button,
 } from "@nextui-org/react";
-import { CreateNote } from "@/lib/interfaces/Note";
+import { CreateNote, Note } from "@/lib/interfaces/Note";
 import { createNewNote } from "@/lib/client_actions/notes-actions";
 import { toast } from "react-toastify";
 import { topCentredColoredToastOptions } from "@/lib/customToastOptions";
@@ -20,6 +20,7 @@ import { useRouter, usePathname } from "next/navigation";
 interface Props {
   authUserID: string;
   setCompletedFetch: Dispatch<SetStateAction<boolean>>;
+  notes?: Note;
 }
 
 export default function CreateNoteButton({
@@ -30,15 +31,12 @@ export default function CreateNoteButton({
   const [noteTitle, setNoteTitle] = useState<string>("");
   const [noteContent, setNoteContent] = useState<string>("");
 
-  const handleCloseWithoutDraftSave = () => {
+  const handleCancel = () => {
     setNoteTitle("");
     setNoteContent("");
     onClose();
   };
-  const handleCloseWithDraftSave = async () => {
-    // save draft await code here
-    onClose();
-  };
+
   const handleCreateNote = async () => {
     let newNote: CreateNote = {
       title: noteTitle,
@@ -74,7 +72,7 @@ export default function CreateNoteButton({
       </Button>
 
       <Modal
-        size="md"
+        size="lg"
         placement="center"
         scrollBehavior="outside"
         backdrop="blur"
@@ -110,21 +108,10 @@ export default function CreateNoteButton({
                 />
               </ModalBody>
               <ModalFooter>
-                <Button
-                  size="sm"
-                  color="primary"
-                  onPress={handleCloseWithDraftSave}
-                >
-                  Save Draft
-                </Button>
                 <Button size="sm" color="success" onPress={handleCreateNote}>
                   Create
                 </Button>
-                <Button
-                  size="sm"
-                  color="danger"
-                  onPress={handleCloseWithoutDraftSave}
-                >
+                <Button size="sm" color="danger" onPress={handleCancel}>
                   Cancel
                 </Button>
               </ModalFooter>

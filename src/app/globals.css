@@ -68,3 +68,11 @@ h3 {
 footer {
   min-height: 12vh;
 }
+
+/* customs */
+/* wrap text "..." */
+.prettytextoverflow {
+  text-overflow: "ellipsis";
+  text-wrap: "wrap";
+  overflow: "clip";
+}
