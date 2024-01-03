@@ -28,7 +28,7 @@ export default function HomeNav() {
   const [session, setSession] = useState<Session | null | undefined>();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = ["Home", "Chat", "Notes", "Pets"];
+  const menuItems = ["Home", "Chat", "Notes"];
 
   useEffect(() => {
     const fetchSessionData = async () => {
