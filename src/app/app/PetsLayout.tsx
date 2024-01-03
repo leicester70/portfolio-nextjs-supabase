@@ -1,5 +1,3 @@
-import HomeNav from "@/components/AppNav";
-
 export default function PetsLayout({
   children,
 }: {
